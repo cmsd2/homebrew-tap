@@ -3,9 +3,9 @@ cask "mdview" do
 
   # Placeholders until the first published cmsd2/mdview release; bump.py
   # fills in the version and both checksums.
-  version "0.0.0"
-  sha256 arm:   "0000000000000000000000000000000000000000000000000000000000000000",
-         intel: "0000000000000000000000000000000000000000000000000000000000000000"
+  version "0.2.0"
+  sha256 arm:   "4966c5ac042a28bd703de46b91e8c9bf3955470911ecc54ebaf792af594f0072",
+         intel: "9c3b6e691a2984a6f1960b6c5c0f8a60ff7f2f57d0f0d77ee5a928c14d0006d2"
 
   url "https://github.com/cmsd2/mdview/releases/download/v#{version}/mdview_#{version}_#{arch}.dmg"
   name "mdview"
