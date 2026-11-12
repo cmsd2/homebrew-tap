@@ -20,5 +20,4 @@ The `Bump` workflow runs it on `repository_dispatch` (`aximar-released`,
 `mdview-released` or `mxpm-released`), and once a day to catch a missed event.
 Each source repo sends its event when a release goes out: aximar and mdview
 from a `Notify tap` workflow on `release: published`, mxpm from the last step
-of its release job. They authenticate with a `TAP_DISPATCH_TOKEN` secret, a
-fine-grained PAT scoped to this repo with Contents read/write.
+of its release job, each with a token scoped to this repo.
