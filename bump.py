@@ -21,8 +21,11 @@ def sha256(url):
 
 def latest(releases, prefix):
     for r in releases:  # API returns newest first
-        if not r["draft"] and not r["prerelease"] and r["tag_name"].startswith(prefix):
-            return r["tag_name"][len(prefix):]
+        tag = r["tag_name"]
+        # plain X.Y.Z only: ignore -rc1 style tags even if published
+        if (not r["draft"] and not r["prerelease"] and tag.startswith(prefix)
+                and re.fullmatch(r"\d+\.\d+\.\d+", tag[len(prefix):])):
+            return tag[len(prefix):]
     sys.exit(f"no published release with tag prefix {prefix!r}")
 
 
