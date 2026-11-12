@@ -16,6 +16,7 @@ jobs:
         run: |
           brew tap-new --no-git local/tap
           cp Formula/*.rb "$(brew --repository local/tap)/Formula/"
+          mkdir -p "$(brew --repository local/tap)/Casks"
           cp Casks/*.rb "$(brew --repository local/tap)/Casks/"
       - name: Audit
         run: |
