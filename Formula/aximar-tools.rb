@@ -1,7 +1,6 @@
 class AximarTools < Formula
   desc "Maxima language server, debug adapter and MCP server from the Aximar project"
   homepage "https://github.com/cmsd2/aximar"
-  version "0.5.0"
   license "GPL-3.0-or-later"
 
   on_macos do
