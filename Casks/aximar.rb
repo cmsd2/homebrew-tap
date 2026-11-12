@@ -1,9 +1,9 @@
 cask "aximar" do
   arch arm: "aarch64", intel: "x64"
 
-  version "0.15.1"
-  sha256 arm:   "faefc98a5d8fa0e21b024772dad6ae3c22d32d307cf64b5419612e7f04a9a18f",
-         intel: "b8d13404b5561a264f20ba29baaa6584e0c92a97b3e2a69cb79881cf6667c89e"
+  version "0.15.2"
+  sha256 arm:   "87d6ba820b3f35e1b286c9d33b2aa93293de6d14d251c5117b09798a25051daa",
+         intel: "246a28471729c145723d6fcb4293d6f76ca1a31c2c523f1141394c22782a6b55"
 
   url "https://github.com/cmsd2/aximar/releases/download/v#{version}/Aximar_#{version}_#{arch}.dmg"
   name "Aximar"
