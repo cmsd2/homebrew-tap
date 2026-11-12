@@ -4,6 +4,16 @@ Homebrew tap for [Aximar](https://github.com/cmsd2/aximar),
 [mxpm](https://github.com/cmsd2/maxima-mxpm) and
 [mdview](https://github.com/cmsd2/mdview).
 
+Homebrew 7 loads formulae and casks from a third-party tap only once you
+trust it, so tap and trust it first:
+
+```sh
+brew tap cmsd2/tap
+brew trust cmsd2/tap
+```
+
+Then install what you need:
+
 ```sh
 brew install --cask cmsd2/tap/aximar   # GUI app + the tools below
 brew install cmsd2/tap/aximar-tools    # just maxima-lsp, maxima-dap, aximar-mcp
