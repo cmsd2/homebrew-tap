@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Update Formula/aximar-tools.rb, Casks/aximar.rb and Casks/mdview.rb to the
-latest published (non-draft, non-prerelease) cmsd2/aximar and cmsd2/mdview
-releases. Stdlib only.
+"""Update Formula/aximar-tools.rb, Formula/mxpm.rb, Casks/aximar.rb and
+Casks/mdview.rb to the latest published (non-draft, non-prerelease)
+cmsd2/aximar, cmsd2/maxima-mxpm and cmsd2/mdview releases. Stdlib only.
 
 Prints the names of changed files; exits 0 either way."""
 import hashlib, json, re, sys, urllib.request
@@ -56,26 +56,33 @@ def dmg_cask(path, base, version, stem):
     rewrite(path, cask)
 
 
+def tarball_formula(path, base, tag, stem):
+    """Point a per-platform tarball formula at release `tag`. Every url line
+    names a `stem-<target>` asset and is followed by its sha256 line."""
+    def formula(text):
+        def url_sub(m):
+            url = f"{base}/{tag}/{m.group(2)}"
+            return f'{m.group(1)}"{url}"\n{m.group(3)}sha256 "{sha256(url)}"'
+
+        return re.sub(
+            rf'(\s*url )"[^"]*/({re.escape(stem)}-[^"/]+)"\n(\s*)sha256 "[0-9a-f]*"',
+            url_sub, text)
+
+    rewrite(path, formula)
+
+
 def main():
     releases = releases_of("cmsd2/aximar")
     base = "https://github.com/cmsd2/aximar/releases/download"
 
-    # --- tools formula: every url line is followed by its sha256 line ---
-    tv = latest(releases, "tools-v")
+    # --- tools formula ---
+    tarball_formula(ROOT / "Formula/aximar-tools.rb", base,
+                    f"tools-v{latest(releases, 'tools-v')}", "aximar-tools")
 
-    def formula(text):
-        text = re.sub(r'(?m)^(\s*version )"[^"]*"', rf'\1"{tv}"', text)
-
-        def url_sub(m):
-            asset = m.group(2)
-            url = f"{base}/tools-v{tv}/{asset}"
-            return f'{m.group(1)}"{url}"\n{m.group(3)}sha256 "{sha256(url)}"'
-
-        return re.sub(
-            r'(\s*url )"[^"]*/(aximar-tools-[^"/]+)"\n(\s*)sha256 "[0-9a-f]*"',
-            url_sub, text)
-
-    rewrite(ROOT / "Formula/aximar-tools.rb", formula)
+    # --- mxpm formula ---
+    tarball_formula(ROOT / "Formula/mxpm.rb",
+                    "https://github.com/cmsd2/maxima-mxpm/releases/download",
+                    f"v{latest(releases_of('cmsd2/maxima-mxpm'), 'v')}", "mxpm")
 
     # --- GUI cask ---
     dmg_cask(ROOT / "Casks/aximar.rb", base, latest(releases, "v"), "Aximar")
