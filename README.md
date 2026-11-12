@@ -12,7 +12,13 @@ brew install --cask cmsd2/tap/mdview   # Markdown viewer
 ```
 
 `bump.py` keeps all four files in step with the latest published GitHub
-releases (`v*` for the apps and mxpm, `tools-v*` for the aximar tools). The `Bump`
-workflow runs it hourly and on `repository_dispatch` (`aximar-released` or
-`mdview-released`). The mdview cask keeps its placeholder version until
-cmsd2/mdview publishes its first release.
+releases (`v*` for the apps and mxpm, `tools-v*` for the aximar tools). It
+takes each checksum from the `digest` the releases API reports for the asset,
+so it downloads nothing unless an asset lacks one.
+
+The `Bump` workflow runs it on `repository_dispatch` (`aximar-released`,
+`mdview-released` or `mxpm-released`), and once a day to catch a missed event.
+Each source repo sends its event when a release goes out: aximar and mdview
+from a `Notify tap` workflow on `release: published`, mxpm from the last step
+of its release job. They authenticate with a `TAP_DISPATCH_TOKEN` secret, a
+fine-grained PAT scoped to this repo with Contents read/write.

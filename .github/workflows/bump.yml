@@ -1,14 +1,20 @@
 name: Bump
 
 on:
+  # Releases arrive by repository_dispatch; the daily run catches a missed one.
   schedule:
-    - cron: "17 * * * *"
+    - cron: "17 6 * * *"
   workflow_dispatch:
   repository_dispatch:
-    types: [aximar-released, mdview-released]
+    types: [aximar-released, mdview-released, mxpm-released]
 
 permissions:
   contents: write
+
+# Two dispatches close together would race on the push.
+concurrency:
+  group: bump
+  cancel-in-progress: false
 
 jobs:
   bump:
@@ -17,6 +23,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Update the formula and casks to the latest releases
         run: python3 bump.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Commit and push
         run: |
           if git diff --quiet; then

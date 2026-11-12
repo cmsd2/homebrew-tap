@@ -3,24 +3,46 @@
 Casks/mdview.rb to the latest published (non-draft, non-prerelease)
 cmsd2/aximar, cmsd2/maxima-mxpm and cmsd2/mdview releases. Stdlib only.
 
+Checksums come from the `digest` field the releases API reports for each
+asset, so a run downloads no assets unless one lacks a digest. Set
+GITHUB_TOKEN to authenticate the API calls (higher rate limit).
+
 Prints the names of changed files; exits 0 either way."""
-import hashlib, json, re, sys, urllib.request
+import hashlib, json, os, re, sys, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
+# browser_download_url -> hex sha256, filled by releases_of()
+DIGESTS = {}
+
 
 def get(url):
-    with urllib.request.urlopen(url) as r:
+    req = urllib.request.Request(url)
+    token = os.environ.get("GITHUB_TOKEN")
+    if token and url.startswith("https://api.github.com/"):
+        req.add_header("Authorization", f"Bearer {token}")
+        req.add_header("Accept", "application/vnd.github+json")
+    with urllib.request.urlopen(req) as r:
         return r.read()
 
 
 def sha256(url):
+    """The asset's API digest, or a download-and-hash when it has none."""
+    if url in DIGESTS:
+        return DIGESTS[url]
+    print(f"no API digest for {url}, downloading", file=sys.stderr)
     return hashlib.sha256(get(url)).hexdigest()
 
 
 def releases_of(repo):
-    return json.loads(get(f"https://api.github.com/repos/{repo}/releases?per_page=50"))
+    releases = json.loads(get(f"https://api.github.com/repos/{repo}/releases?per_page=50"))
+    for r in releases:
+        for a in r["assets"]:
+            algo, _, hexdigest = (a.get("digest") or "").partition(":")
+            if algo == "sha256" and hexdigest:
+                DIGESTS[a["browser_download_url"]] = hexdigest
+    return releases
 
 
 def latest(releases, prefix, required=True):
