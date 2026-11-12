@@ -23,3 +23,4 @@ jobs:
         run: |
           brew audit --strict --formula local/tap/aximar-tools
           brew audit --strict --cask local/tap/aximar
+          brew audit --strict --cask local/tap/mdview
