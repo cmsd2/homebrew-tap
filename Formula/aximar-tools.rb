@@ -5,23 +5,23 @@ class AximarTools < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.0/aximar-tools-aarch64-apple-darwin.tar.gz"
-      sha256 "138ce1f2455f40004c70dc26069e65f82e6ec421070929157662d3bf69820f4e"
+      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.1/aximar-tools-aarch64-apple-darwin.tar.gz"
+      sha256 "e8bc7c0f13d979a646cf88e31abd9030cce30d14c16fe5e353fc36c941466b94"
     end
     on_intel do
-      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.0/aximar-tools-x86_64-apple-darwin.tar.gz"
-      sha256 "ccee41a78c0e8cd4846a5666a76b2d1dd1b400ad609a0c26a26850e8f76c3a06"
+      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.1/aximar-tools-x86_64-apple-darwin.tar.gz"
+      sha256 "94f5d4bb6f3c37625cb792a21537c6111efdd4ed8646bdf330aee20b3bfb52da"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.0/aximar-tools-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "d76e4ed4a5d7c03be06a924793ff83dd9c5c95304c67e1106b45b923967308f3"
+      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.1/aximar-tools-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "b66a5c29056698fe9590e16e5d1de3057bff6575ed40b36f91c7b73a7b3858a7"
     end
     on_intel do
-      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.0/aximar-tools-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "d52253be323f19289405186f9c5d9eae5606f6586207576aa2e236680c1bd2cc"
+      url "https://github.com/cmsd2/aximar/releases/download/tools-v0.6.1/aximar-tools-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "0559966f2587f52a04ae2b82246cb3114ce6985875e7e77331c1c42e3be7937d"
     end
   end
 
