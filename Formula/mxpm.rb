@@ -5,23 +5,23 @@ class Mxpm < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.0/mxpm-aarch64-apple-darwin.tar.gz"
-      sha256 "754c90364cb6fcb20d7afee3c8a30ad9f352734b3924fcc54a7189a9221bccb8"
+      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.1/mxpm-aarch64-apple-darwin.tar.gz"
+      sha256 "326a00d890f9c0c0b74885a446e0922ff43a372e85704e5ec84d23237e91657d"
     end
     on_intel do
-      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.0/mxpm-x86_64-apple-darwin.tar.gz"
-      sha256 "96a29b999d8dc9c86710a9f27e3d245c34bb88a03eded365614507cd64266ce3"
+      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.1/mxpm-x86_64-apple-darwin.tar.gz"
+      sha256 "a7288289565a2d3bf8a463b7ed2366314099e7ba990a04b889348b0d53347c53"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.0/mxpm-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "6f881f541a065a15c25975d68b058855c734e15964d8ea6cb7e6aaa828fdcf38"
+      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.1/mxpm-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "bba97c353e262db6fdf89b58efa0360248d5633109d9cd26db6db2d5df75b677"
     end
     on_intel do
-      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.0/mxpm-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "4081269fed90e83c5f559c29eb8b92cb24a1f3debab8891c523067254e3d860a"
+      url "https://github.com/cmsd2/maxima-mxpm/releases/download/v0.9.1/mxpm-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "b653b070a92011e48e21fbeac6f57e6baacf1f9bfdcffeb795b441548985de19"
     end
   end
 
